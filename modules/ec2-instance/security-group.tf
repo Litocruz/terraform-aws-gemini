@@ -2,7 +2,7 @@
 
 resource "aws_security_group" "web_sg" {
   name        = var.security_group_name
-  description = "Grupo de seguridad para permitir el tráfico web (HTTP)"
+  description = "Security group for web server"
 
   # Regla de entrada (Ingress)
   ingress {
