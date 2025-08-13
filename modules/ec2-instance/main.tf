@@ -21,18 +21,3 @@ resource "aws_instance" "devops_instance" {
     Name = "instancia-con-servidor-web"
   }
 }
-
-# modules/ec2-instance/main.tf
-
-resource "aws_instance" "devops_instance" {
-  ami           = "ami-0c55b159cb61040f7"
-  instance_type = "t2.micro"
-
-  vpc_security_group_ids = [aws_security_group.web_sg.id]
-
-  user_data = file("${path.module}/userdata.sh")
-
-  tags = {
-    Name = "instancia-con-servidor-web"
-  }
-}
