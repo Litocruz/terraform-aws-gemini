@@ -6,7 +6,7 @@
 resource "aws_instance" "devops_instance" {
   # El AMI ID es el ID de la imagen de la máquina virtual.
   # Para LocalStack, este valor puede ser cualquier cosa que siga el formato.
-  ami = "ami-0c55b159cb61040f7"
+  ami = "ami-0de716d6197524dd9"
 
   # El tipo de instancia, por ejemplo, "t2.micro" que es elegible para la capa gratuita.
   instance_type = "t2.micro"
