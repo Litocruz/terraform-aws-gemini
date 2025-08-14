@@ -1,18 +1,13 @@
-# .github/workflows/terraform.yml
+# .github/workflows/create.yml
 
-name: 'Terraform CI/CD'
+name: 'Terraform Create Infrastructure'
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
-  terraform:
-    name: 'Terraform'
+  create-infra:
+    name: 'Create Infrastructure'
     runs-on: ubuntu-latest
     env:
       TF_VAR_aws_region: us-east-1
@@ -23,8 +18,6 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: 1.6.4 # O la versión que estés usando
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -37,16 +30,5 @@ jobs:
         id: init
         run: terraform init
 
-      - name: Terraform Validate
-        id: validate
-        run: terraform validate
-
-      - name: Terraform Plan
-        id: plan
-        run: terraform plan -no-color
-
       - name: Terraform Apply
-        if: github.event_name == 'push'
         run: terraform apply -auto-approve
-
-
