@@ -8,11 +8,11 @@ terraform {
     }
   }
   
-  # backend "s3" {
-  #   bucket = "mi-bucket-de-estado-terraform-devops" # Usa el mismo nombre del bucket
-  #   key    = "terraform.tfstate"
-  #   region = "us-east-1"
-  # }
+  backend "s3" {
+    bucket = "mi-bucket-de-estado-terraform-devops" # Usa el mismo nombre del bucket
+    key    = "terraform.tfstate"
+    region = "us-east-1"
+  }
 }
 
 provider "aws" {
