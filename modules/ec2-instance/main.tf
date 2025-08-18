@@ -3,6 +3,10 @@
 #  public_key = file("~/.ssh/id_ed25519.pub")
 #}
 
+data "aws_ssm_parameter" "password" {
+  name = "/mi-proyecto/password"
+}
+
 resource "aws_instance" "devops_instance" {
   # El AMI ID es el ID de la imagen de la máquina virtual.
   # Para LocalStack, este valor puede ser cualquier cosa que siga el formato.
@@ -15,7 +19,9 @@ resource "aws_instance" "devops_instance" {
 
   vpc_security_group_ids = [aws_security_group.web_sg.id]
 
-  user_data = file("${path.module}/userdata.sh")
+  user_data = templatefile("${path.module}/userdata.sh", {
+    password = data.aws_ssm_parameter.password.value
+  })
 
   tags = {
     Name = "instancia-con-servidor-web"
