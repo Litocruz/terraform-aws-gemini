@@ -4,6 +4,7 @@
 #}
 
 data "aws_ssm_parameter" "password" {
+  count = var.environment == "aws" ? 1 : 0
   name = "/mi-proyecto/password"
 }
 
@@ -20,7 +21,7 @@ resource "aws_instance" "devops_instance" {
   vpc_security_group_ids = [aws_security_group.web_sg.id]
 
   user_data = templatefile("${path.module}/userdata.sh", {
-    password = data.aws_ssm_parameter.password.value
+    password = var.environment == "aws" ? data.aws_ssm_parameter.password[0].value : ""
   })
 
   tags = {
