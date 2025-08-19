@@ -4,6 +4,7 @@ module "web_server" {
   source                = "./modules/ec2-instance"
   public_key_name       = "mi-llave-del-servidor-web"
   security_group_name   = "servidor-web-sg"
+  environment         = var.environment  # Aquí pasas la variable al módulo
 }
 
 output "public_ip_del_servidor" {
