@@ -46,8 +46,7 @@ Luego, configura el AWS CLI con las credenciales de tu usuario de IAM:
 
 ```bash
 aws configure
-
----------
+```
 
 ## Flujos de trabajo
 
